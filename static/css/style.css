@@ -1,0 +1,258 @@
+/* styles.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position:fixed;
+  top:0;
+  left:0;
+  padding: 10px 20px;
+  background-color: #1565C0;
+  color: white;
+  z-index: 1000;
+}
+.body-content {
+  margin-top: 80px; /* Adjust this value to match the height of the header */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px; /* Adds rounded corners */
+  padding: 5px; /* Adds space around the image */
+  height: 30px; /* Set the height of the logo container */
+  width: auto; /* Set the width of the logo container */
+  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for better visibility */
+}
+
+.logo img {
+  height: 100%; /* Ensures the image fits within the container */
+  width: auto; /* Maintains the aspect ratio */
+}
+.logo h1{
+  margin-left:5px;
+  color:white;
+  font-size: 24px;
+  font-weight: bold;
+}
+.location-selector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.location-selector i {
+  font-size: 16px;
+}
+
+.location-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-text span:first-child {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.city-pincode span {
+  font-size: 12px;
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  max-width: 600px;
+  margin: 0 20px;
+  height: 46px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.search-bar button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-bar button:hover {
+  background-color: #328635;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart .fa-shopping-cart {
+  font-size: 24px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: #FF0000;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+}
+
+.signin {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.signin .fa-user-circle {
+  font-size: 24px;
+}
+
+
+/* Banner styles */
+.banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px auto; /* Center the banner horizontally */
+  width: 100%;
+  max-width: 1500px; /* Max width for larger screens */
+  height: auto;
+}
+
+.banner img {
+  width: 100%;
+  max-width: 1500px;
+  height: auto; /* Ensures the aspect ratio is maintained */
+  border-radius: 10px; /* Optional: Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Subtle shadow effect */
+}
+
+.best-deals {
+  width: 100%;
+  max-width: 1500px;
+  margin: 20px auto;
+  background-color: #f9f9f9; /* Light background color */
+
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  color: #333;
+  padding-left:18px;
+}
+
+.section-header .see-all {
+  font-size: 14px;
+  color: #0051A3;
+  text-decoration: none;
+  padding-right:18px;
+}
+
+.product-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  padding: 10px;
+}
+
+.product-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  width: 200px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.product-card h3 {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.price {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.current-price {
+  color: #0051A3;
+  font-weight: bold;
+}
+
+.off {
+  color: #ff5722;
+  font-size: 12px;
+}
+
+.delivery {
+  font-size: 12px;
+  color: #777;
+}
+
+.rating {
+  font-size: 14px;
+  color: #ffa000;
+}
