@@ -46,7 +46,7 @@ body {
 .location-selector {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
   color: white;
   cursor: pointer;
 }
@@ -72,7 +72,7 @@ body {
 .search-bar {
   display: flex;
   flex: 1;
-  max-width: 600px;
+  max-width: 950px;
   margin: 0 20px;
   height: 46px;
 }
@@ -102,12 +102,13 @@ body {
 .header-icons {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .cart {
   position: relative;
   cursor: pointer;
+  gap:30px;
 }
 
 .cart .fa-shopping-cart {
@@ -131,6 +132,7 @@ body {
   align-items: center;
   gap: 5px;
   cursor: pointer;
+  padding-right: 64px;
 }
 
 .signin .fa-user-circle {
@@ -143,7 +145,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0px auto; /* Center the banner horizontally */
+  margin:76px auto;/* Center the banner horizontally */
+  margin-bottom: 0;
   width: 100%;
   max-width: 1500px; /* Max width for larger screens */
   height: auto;
@@ -233,7 +236,7 @@ body {
 }
 
 .price {
-  font-size: 14px;
+  font-size: 18px;
   margin: 5px 0;
 }
 
