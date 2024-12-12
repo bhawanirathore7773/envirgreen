@@ -50,18 +50,7 @@
   <div class="product-carousel">
     <button class="arrow left-arrow"><i class="fas fa-chevron-left"></i></button>
     <div class="product-list">
-      {% for product in best_deals %}
-      <div class="product-card">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        <h3>{{ product.name }}</h3>
-        <div class="price">
-          <span class="current-price">₹{{ product.price }}</span>
-          <span class="off">{{ product.discount }}% Off</span>
-        </div>
-        <p class="delivery">Delivery by {{ product.delivery_date }}</p>
-        <div class="rating">Rating: {{ product.rating }}/5</div>
-      </div>
-      {% endfor %}
+
     </div>
     <button class="arrow right-arrow"><i class="fas fa-chevron-right"></i></button>
   </div>
