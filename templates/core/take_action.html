@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Take action — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <h1>What do you want to do?</h1>
+  <p class="muted">Pick one — we'll take you straight there.</p>
+  <div class="card-grid">
+    <a class="card" href="{% url 'trees:plant' %}"><div class="card-body"><h3>🌱 Plant a tree</h3><p class="muted">Log a plantation and track it to survival.</p></div></a>
+    <a class="card" href="{% url 'campaigns:list' %}"><div class="card-body"><h3>🧹 Join a cleanup</h3><p class="muted">Find an active campaign near you.</p></div></a>
+    <a class="card" href="{% url 'issues:report' %}"><div class="card-body"><h3>📍 Report an issue</h3><p class="muted">Document a problem and track its resolution.</p></div></a>
+    <a class="card" href="{% url 'volunteers:register' %}"><div class="card-body"><h3>🤝 Become a volunteer</h3><p class="muted">Register your skills and availability.</p></div></a>
+    <a class="card" href="{% url 'campaigns:list' %}"><div class="card-body"><h3>💰 Support a campaign</h3><p class="muted">Financial, material, or skills support.</p></div></a>
+    <a class="card" href="{% url 'community:feed' %}"><div class="card-body"><h3>📸 Share your action</h3><p class="muted">Post what you already did.</p></div></a>
+  </div>
+</div>
+{% endblock %}

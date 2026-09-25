@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Impact dashboard — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <h1>Impact dashboard</h1>
+  <p class="muted">Every number below is computed from real platform records — see <a href="{% url 'core:about' %}">our transparency approach</a>.</p>
+  <form method="get" style="max-width:240px; margin-bottom:20px;">
+    <input type="text" name="city" placeholder="Filter by city" value="{{ city }}">
+  </form>
+  <div class="stat-strip">
+    <div class="stat"><span class="num">🌳 {{ snapshot.trees_planted }}</span><span class="label">Trees planted</span></div>
+    <div class="stat"><span class="num">{{ snapshot.survival_rate_percent }}%</span><span class="label">Tree survival rate</span></div>
+    <div class="stat"><span class="num">🧹 {{ snapshot.cleanup_drives }}</span><span class="label">Cleanup drives</span></div>
+    <div class="stat"><span class="num">♻️ {{ snapshot.waste_collected_kg }} kg</span><span class="label">Waste collected</span></div>
+    <div class="stat"><span class="num">👥 {{ snapshot.active_volunteers }}</span><span class="label">Active volunteers</span></div>
+    <div class="stat"><span class="num">📍 {{ snapshot.issues_reported }}</span><span class="label">Issues reported</span></div>
+    <div class="stat"><span class="num">✅ {{ snapshot.resolution_rate_percent }}%</span><span class="label">Resolution rate</span></div>
+    <div class="stat"><span class="num">🏫 {{ snapshot.institutions_reached }}</span><span class="label">Institutions reached</span></div>
+  </div>
+  <p class="muted">Generated {{ snapshot.generated_at }}. See docs/02-core-platform-systems.md for the methodology behind each figure.</p>
+</div>
+{% endblock %}

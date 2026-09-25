@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Tree map — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <div class="section-head">
+    <h1>Trees planted</h1>
+    <a href="{% url 'trees:plant' %}" class="btn btn-primary btn-small">Plant a tree</a>
+  </div>
+  <p class="muted">A real build renders these as clustered map pins (see docs/01-sitemap-ux-design.md). This scaffold lists them.</p>
+  <div class="card-grid">
+    {% for tree in trees %}
+      <div class="card"><div class="card-body">
+        <span class="badge">{{ tree.get_status_display }}</span>
+        <h3>{{ tree.count }} × {{ tree.species }}</h3>
+        <div class="card-meta">{{ tree.location }} · planted {{ tree.planted_on }}</div>
+      </div></div>
+    {% empty %}<p class="muted">No trees logged yet.</p>{% endfor %}
+  </div>
+</div>
+{% endblock %}

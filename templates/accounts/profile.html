@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ profile_user.username }} — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <span class="badge">{{ profile_user.profile.get_role_display }}</span>
+  <h1>{{ profile_user.username }}</h1>
+  <p class="muted">📍 {{ profile_user.profile.city|default:"City not set" }}</p>
+  <p>{{ profile_user.profile.bio }}</p>
+  <div class="stat-strip">
+    <div class="stat"><span class="num">{{ profile_user.profile.trees_planted }}</span><span class="label">Trees planted</span></div>
+    <div class="stat"><span class="num">{{ profile_user.profile.issues_reported }}</span><span class="label">Issues reported</span></div>
+    <div class="stat"><span class="num">{{ profile_user.profile.campaigns_joined }}</span><span class="label">Campaigns joined</span></div>
+    <div class="stat"><span class="num">{{ profile_user.profile.badges_count }}</span><span class="label">Badges</span></div>
+    <div class="stat"><span class="num">{{ profile_user.profile.action_score }}</span><span class="label">Action score</span></div>
+  </div>
+  {% if user == profile_user %}<a href="{% url 'accounts:edit_profile' %}" class="btn btn-secondary btn-small">Edit profile</a>{% endif %}
+</div>
+{% endblock %}

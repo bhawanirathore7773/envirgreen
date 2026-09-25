@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-eyebrow">Clean · Green · Responsible</div>
+      <h1>Let's make our surroundings clean, green &amp; responsible.</h1>
+      <p class="muted">Envirgreen brings people together to clean public spaces, grow greenery, build civic sense, and turn environmental concerns into real-world action.</p>
+      <div class="hero-actions">
+        <a href="{% url 'accounts:signup' %}" class="btn btn-primary">Join Envirgreen</a>
+        <a href="{% url 'core:take_action' %}" class="btn btn-secondary">Take action</a>
+      </div>
+      <p style="margin-top:14px;"><a href="{% url 'issues:report' %}">Report an issue</a></p>
+    </div>
+    <div class="hero-visual">Real photos of volunteers, cleanups and plantation drives go here.</div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="stat-strip">
+    <div class="stat"><span class="num">{{ snapshot.trees_planted }}</span><span class="label">Trees planted</span></div>
+    <div class="stat"><span class="num">{{ snapshot.waste_collected_kg }} kg</span><span class="label">Waste collected</span></div>
+    <div class="stat"><span class="num">{{ snapshot.cleanup_drives }}</span><span class="label">Cleanup drives</span></div>
+    <div class="stat"><span class="num">{{ snapshot.active_volunteers }}</span><span class="label">Volunteers</span></div>
+    <div class="stat"><span class="num">{{ snapshot.issues_resolved }}</span><span class="label">Issues resolved</span></div>
+  </div>
+
+  <section class="section">
+    <h2>Why Envirgreen</h2>
+    <p class="muted">Environmental change isn't only the responsibility of authorities — it's a shared responsibility.</p>
+    <div class="pillars">
+      <div class="pillar"><div class="icon">🧹</div><h3>Clean</h3><p class="muted">Clean surroundings and responsible waste behaviour.</p></div>
+      <div class="pillar"><div class="icon">🌳</div><h3>Green</h3><p class="muted">Plant, protect and grow trees.</p></div>
+      <div class="pillar"><div class="icon">🤝</div><h3>Responsible</h3><p class="muted">Build civic sense and community ownership.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="actions-grid">
+      <div class="action-card"><h3>📍 See a problem?</h3><p class="muted">Report it and watch it move through to resolution.</p><a href="{% url 'issues:report' %}" class="btn btn-ghost btn-small">Report an issue</a></div>
+      <div class="action-card"><h3>🤝 Want to help?</h3><p class="muted">Join a campaign near you — no experience needed.</p><a href="{% url 'campaigns:list' %}" class="btn btn-ghost btn-small">Browse campaigns</a></div>
+      <div class="action-card"><h3>📸 Already took action?</h3><p class="muted">Share it and document your impact.</p><a href="{% url 'community:feed' %}" class="btn btn-ghost btn-small">Share to community</a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2>Active campaigns</h2>
+      <a href="{% url 'campaigns:list' %}">See all campaigns</a>
+    </div>
+    <div class="card-grid">
+      {% for campaign in active_campaigns %}
+        <a href="{{ campaign.get_absolute_url }}" class="card">
+          <div class="card-media"></div>
+          <div class="card-body">
+            <span class="badge">{{ campaign.get_campaign_type_display }}</span>
+            <h3>{{ campaign.title }}</h3>
+            <div class="card-meta">{{ campaign.location }}</div>
+            <div class="progress-track"><div class="progress-fill" style="width:{{ campaign.progress_percent }}%"></div></div>
+            <div class="card-meta">{{ campaign.progress_count }}/{{ campaign.goal_count }} drives · {{ campaign.volunteer_count }} volunteers</div>
+          </div>
+        </a>
+      {% empty %}
+        <p class="muted">No active campaigns yet — check back soon, or <a href="{% url 'campaigns:list' %}">start one</a>.</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Recently reported</h2><a href="{% url 'issues:list' %}">See all issues</a></div>
+    <div class="card-grid">
+      {% for issue in recent_issues %}
+        <a href="{{ issue.get_absolute_url }}" class="card">
+          <div class="card-body">
+            <span class="badge earth">{{ issue.get_status_display }}</span>
+            <h3>{{ issue.title }}</h3>
+            <div class="card-meta">{{ issue.location }} · {{ issue.category }}</div>
+          </div>
+        </a>
+      {% empty %}
+        <p class="muted">No reports yet.</p>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Events — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <h1>Upcoming events</h1>
+  <div class="card-grid">
+    {% for event in events %}
+      <a href="{{ event.get_absolute_url }}" class="card">
+        <div class="card-body">
+          <h3>{{ event.title }}</h3>
+          <div class="card-meta">{{ event.start_time }} · {{ event.location }}</div>
+          {% if event.capacity %}<div class="card-meta">{{ event.spots_left }} spots left</div>{% endif %}
+        </div>
+      </a>
+    {% empty %}<p class="muted">No events scheduled right now.</p>{% endfor %}
+  </div>
+</div>
+{% endblock %}

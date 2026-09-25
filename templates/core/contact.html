@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Contact Envirgreen{% endblock %}
+{% block content %}
+<div class="container section" style="max-width:560px;">
+  <h1>Get in touch</h1>
+  <p class="muted">General enquiry, volunteering, partnerships, media, or a campaign idea — tell us below.</p>
+  <form method="post">
+    {% csrf_token %}
+    <div class="field"><label for="name">Name</label><input id="name" name="name" required></div>
+    <div class="field"><label for="email">Email</label><input id="email" type="email" name="email" required></div>
+    <div class="field"><label for="topic">Topic</label>
+      <select id="topic" name="topic">
+        <option>General enquiry</option><option>Volunteer</option><option>Partnership</option>
+        <option>Media</option><option>Donation</option><option>Report an issue</option>
+      </select>
+    </div>
+    <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
+    <button class="btn btn-primary" type="submit">Send message</button>
+  </form>
+</div>
+{% endblock %}

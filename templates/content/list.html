@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Blog — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <h1>Blog &amp; knowledge center</h1>
+  <div class="card-grid">
+    {% for post in posts %}
+      <a href="{{ post.get_absolute_url }}" class="card">
+        <div class="card-body">
+          {% if post.category %}<span class="badge">{{ post.category }}</span>{% endif %}
+          <h3>{{ post.title }}</h3>
+          <p class="muted">{{ post.excerpt }}</p>
+        </div>
+      </a>
+    {% empty %}<p class="muted">No posts published yet.</p>{% endfor %}
+  </div>
+</div>
+{% endblock %}

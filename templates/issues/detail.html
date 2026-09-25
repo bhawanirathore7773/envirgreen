@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ issue.title }} — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <span class="badge earth">{{ issue.get_severity_display }} severity</span>
+  {% if issue.is_recurring %}<span class="badge">Recurring</span>{% endif %}
+  <h1>{{ issue.title }}</h1>
+  <p class="muted">📍 {{ issue.location }} · {{ issue.category }} · reported {{ issue.created_at|date:"d M Y" }}</p>
+  {% if issue.photo %}<img src="{{ issue.photo.url }}" alt="Photo of the reported issue" style="max-width:100%; border-radius:14px; margin:16px 0;">{% endif %}
+  <p>{{ issue.description }}</p>
+
+  <h2>Status</h2>
+  {% if issue.status == "escalated" or issue.status == "no_action" %}
+    <p class="badge earth">{{ issue.get_status_display }} — off the standard pipeline, see timeline below</p>
+  {% endif %}
+  <div class="pipeline">
+    {% for step in issue.pipeline_steps %}
+      <div class="pipeline-step {{ step.state }}">
+        <div class="pipeline-dot"></div>
+        <div><div class="pipeline-label">{{ step.label }}</div></div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <h2>Timeline</h2>
+  {% for update in timeline %}
+    <div class="pipeline-step done">
+      <div class="pipeline-dot"></div>
+      <div>
+        <div class="pipeline-label">{{ update.get_status_display }} — {{ update.created_at|date:"d M" }}</div>
+        {% if update.note %}<div class="pipeline-note">{{ update.note }}</div>{% endif %}
+      </div>
+    </div>
+  {% empty %}
+    <p class="muted">No updates yet — this issue is newly reported.</p>
+  {% endfor %}
+</div>
+{% endblock %}

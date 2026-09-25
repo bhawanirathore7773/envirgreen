@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}About Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <h1>About Envirgreen</h1>
+  <p>Envirgreen exists on one idea: environmental change isn't only the responsibility of authorities — it's a shared responsibility. We turn that idea into a working loop: someone sees a problem, reports it, the community verifies it, people mobilize, the problem visibly changes, and the result gets documented so others can see it worked.</p>
+  <h2>Our mission</h2>
+  <p>Cleaner surroundings. More trees. More greenery. Better civic sense. Stronger communities. Real action. Measurable impact.</p>
+  <h2>How we work</h2>
+  <p>Every report, campaign, and tree on this platform is tracked through to a verified outcome — not just logged and forgotten. See the <a href="{% url 'impact:dashboard' %}">impact dashboard</a> for real, database-driven numbers.</p>
+</div>
+{% endblock %}

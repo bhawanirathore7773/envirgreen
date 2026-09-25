@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Report an issue — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section" style="max-width:560px;">
+  <h1>Report an environmental issue</h1>
+  <p class="muted">Photos help a lot — they're what gets an issue verified quickly.</p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Submit report</button>
+  </form>
+</div>
+{% endblock %}

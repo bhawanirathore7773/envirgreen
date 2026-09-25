@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Support {{ campaign.title }} — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section" style="max-width:480px;">
+  <h1>Support {{ campaign.title }}</h1>
+  <p class="muted">Choose what your contribution goes toward — this is shown publicly on our transparency page, in aggregate.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Continue to payment</button>
+  </form>
+  <p class="help-text">Payment gateway integration (e.g. Razorpay) is not wired up in this scaffold — see docs/03-technical-architecture.md.</p>
+</div>
+{% endblock %}

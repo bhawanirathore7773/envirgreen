@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} — Envirgreen{% endblock %}
+{% block meta_description %}{{ post.meta_description|default:post.excerpt }}{% endblock %}
+{% block content %}
+<div class="container section" style="max-width:680px;">
+  <h1>{{ post.title }}</h1>
+  <p class="muted">{{ post.published_at|date:"d M Y" }}{% if post.author %} · {{ post.author }}{% endif %}</p>
+  <div>{{ post.body|linebreaks }}</div>
+</div>
+{% endblock %}

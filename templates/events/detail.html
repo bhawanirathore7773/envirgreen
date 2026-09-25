@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ event.title }} — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <h1>{{ event.title }}</h1>
+  <p class="muted">🗓 {{ event.start_time }} · 📍 {{ event.location }}{% if event.meeting_point %} — meet at {{ event.meeting_point }}{% endif %}</p>
+  {% if event.campaign %}<p>Part of <a href="{{ event.campaign.get_absolute_url }}">{{ event.campaign.title }}</a></p>{% endif %}
+  <p>{{ event.description }}</p>
+  {% if event.required_equipment %}<p><strong>Bring:</strong> {{ event.required_equipment }}</p>{% endif %}
+  <p class="muted">{{ event.registered_count }} registered{% if event.capacity %} of {{ event.capacity }}{% endif %}</p>
+
+  {% if user.is_authenticated %}
+    {% if is_registered %}
+      <p class="badge">You're registered</p>
+    {% else %}
+      <form method="post" action="{% url 'events:register' event.slug %}">
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Join event</button>
+      </form>
+    {% endif %}
+  {% else %}
+    <p><a href="{% url 'accounts:login' %}?next={{ request.path }}">Log in to register</a></p>
+  {% endif %}
+</div>
+{% endblock %}

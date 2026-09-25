@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Become a volunteer — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section" style="max-width:560px;">
+  <h1>Join as an Envirgreen volunteer</h1>
+  <p class="muted">You don't need special skills to start — just a willingness to show up. Tell us your availability and interests, and we'll match you to a nearby campaign.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Register as a volunteer</button>
+  </form>
+</div>
+{% endblock %}

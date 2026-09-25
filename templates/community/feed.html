@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Community — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section" style="max-width:640px;">
+  <h1>Community</h1>
+  <p class="muted">The most valuable post here isn't "look at me" — it's "look what we changed."</p>
+
+  {% if form %}
+    <form method="post" action="{% url 'community:create_post' %}" enctype="multipart/form-data" style="background:white; border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:24px;">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary btn-small" type="submit">Post</button>
+    </form>
+  {% endif %}
+
+  {% for post in posts %}
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-body">
+        <span class="badge">{{ post.get_post_type_display }}</span>
+        {% if post.is_verified %}<span class="badge">Verified</span>{% endif %}
+        <div class="card-meta">{{ post.author }} · {{ post.created_at|timesince }} ago</div>
+        <p>{{ post.text }}</p>
+        {% if post.image %}<img src="{{ post.image.url }}" alt="" style="max-width:100%; border-radius:10px;">{% endif %}
+        <form method="post" action="{% url 'community:react' post.id %}" style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">
+          {% csrf_token %}
+          <button class="btn btn-ghost btn-small" name="reaction_type" value="green_action">🌱</button>
+          <button class="btn btn-ghost btn-small" name="reaction_type" value="clean_action">🧹</button>
+          <button class="btn btn-ghost btn-small" name="reaction_type" value="tree_champion">🌳</button>
+          <button class="btn btn-ghost btn-small" name="reaction_type" value="community_support">💚</button>
+          <button class="btn btn-ghost btn-small" name="reaction_type" value="inspiration">👏</button>
+          <span class="card-meta">{{ post.appreciation_count }}</span>
+        </form>
+      </div>
+    </div>
+  {% empty %}
+    <p class="muted">Nothing here yet — be the first to share an action.</p>
+  {% endfor %}
+</div>
+{% endblock %}

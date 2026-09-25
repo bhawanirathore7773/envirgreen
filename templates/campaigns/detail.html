@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ campaign.title }} — Envirgreen{% endblock %}
+{% block content %}
+<div class="container section">
+  <span class="badge">{{ campaign.get_campaign_type_display }}</span>
+  <h1>{{ campaign.title }}</h1>
+  <p class="muted">📍 {{ campaign.location }} · {{ campaign.start_date }}{% if campaign.end_date %} – {{ campaign.end_date }}{% endif %}</p>
+  <p>{{ campaign.objective }}</p>
+
+  <div class="progress-track"><div class="progress-fill" style="width:{{ campaign.progress_percent }}%"></div></div>
+  <p class="card-meta">{{ campaign.progress_count }}/{{ campaign.goal_count }} drives completed · {{ campaign.volunteer_count }} volunteers</p>
+
+  {% if user.is_authenticated %}
+    {% if already_joined %}
+      <p class="badge">You're part of this campaign</p>
+    {% else %}
+      <form method="post" action="{% url 'campaigns:join' campaign.slug %}" style="display:flex; gap:10px; flex-wrap:wrap; margin:18px 0;">
+        {% csrf_token %}
+        <select name="support_type">
+          <option value="volunteer">I want to volunteer</option>
+          <option value="material">I can provide materials</option>
+          <option value="skills">I can help with skills (photo, design, etc.)</option>
+        </select>
+        <input type="text" name="detail" placeholder="Optional detail (e.g. gloves, photography)">
+        <button class="btn btn-primary" type="submit">Join campaign</button>
+      </form>
+    {% endif %}
+    <a href="{% url 'donations:donate' campaign.slug %}" class="btn btn-secondary btn-small">Support financially</a>
+  {% else %}
+    <p><a href="{% url 'accounts:login' %}?next={{ request.path }}">Log in to join this campaign</a></p>
+  {% endif %}
+
+  <h2 style="margin-top:32px;">Events</h2>
+  <div class="card-grid">
+    {% for event in campaign.events.all %}
+      <a href="{{ event.get_absolute_url }}" class="card"><div class="card-body"><h3>{{ event.title }}</h3><div class="card-meta">{{ event.start_time }}</div></div></a>
+    {% empty %}<p class="muted">No events scheduled yet.</p>{% endfor %}
+  </div>
+</div>
+{% endblock %}

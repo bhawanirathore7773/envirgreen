@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Notifications{% endblock %}
+{% block content %}
+<div class="container section" style="max-width:520px;">
+  <h1>Notifications</h1>
+  {% for n in notifications %}
+    <div class="card" style="margin-bottom:10px;"><div class="card-body"><p>{{ n.verb }}</p><div class="card-meta">{{ n.created_at|timesince }} ago</div></div></div>
+  {% empty %}<p class="muted">No notifications yet.</p>{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ SITE_NAME }} — {{ SITE_TAGLINE }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Envirgreen brings people together to clean public spaces, grow greenery, and build civic sense — one verified action at a time.{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="{% url 'core:home' %}" class="nav-logo">Envir<span>green</span></a>
+      <div class="nav-links">
+        <a href="{% url 'campaigns:list' %}">Campaigns</a>
+        <a href="{% url 'community:feed' %}">Community</a>
+        <a href="{% url 'impact:dashboard' %}">Impact</a>
+        <a href="{% url 'volunteers:register' %}">Volunteer</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'accounts:profile' username=user.username %}">{{ user.username }}</a>
+          <a href="{% url 'accounts:logout' %}">Log out</a>
+        {% else %}
+          <a href="{% url 'accounts:login' %}">Log in</a>
+        {% endif %}
+        <a href="{% url 'core:take_action' %}" class="btn btn-primary btn-small">Take action</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Envirgreen</h4>
+          <p class="muted" style="max-width:220px;">{{ SITE_TAGLINE }}</p>
+        </div>
+        <div>
+          <h4>Take action</h4>
+          <ul>
+            <li><a href="{% url 'issues:report' %}">Report an issue</a></li>
+            <li><a href="{% url 'campaigns:list' %}">Campaigns</a></li>
+            <li><a href="{% url 'volunteers:register' %}">Volunteer</a></li>
+            <li><a href="{% url 'trees:plant' %}">Plant a tree</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <ul>
+            <li><a href="{% url 'content:list' %}">Blog</a></li>
+            <li><a href="{% url 'impact:dashboard' %}">Impact dashboard</a></li>
+            <li><a href="{% url 'core:about' %}">About Envirgreen</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="{% url 'core:contact' %}">Get in touch</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">X</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">© {% now "Y" %} Envirgreen. Community-built, community-run.</div>
+    </div>
+  </footer>
+</body>
+</html>
