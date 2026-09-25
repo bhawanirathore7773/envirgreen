@@ -14,7 +14,8 @@
   <nav class="nav">
     <div class="container">
       <a href="{% url 'core:home' %}" class="nav-logo">Envir<span>green</span></a>
-      <div class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-navigation">☰</button>
+      <div class="nav-links" id="site-navigation">
         <a href="{% url 'campaigns:list' %}">Campaigns</a>
         <a href="{% url 'community:feed' %}">Community</a>
         <a href="{% url 'impact:dashboard' %}">Impact</a>
@@ -77,5 +78,26 @@
       <div class="footer-bottom">© {% now "Y" %} Envirgreen. Community-built, community-run.</div>
     </div>
   </footer>
+  <script>
+    (function () {
+      const toggle = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('site-navigation');
+      if (!toggle || !nav) return;
+      toggle.addEventListener('click', function () {
+        const open = nav.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        toggle.textContent = open ? '×' : '☰';
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+          toggle.textContent = '☰';
+        });
+      });
+    }());
+  </script>
 </body>
 </html>
