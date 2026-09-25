@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Log in — Envirgreen{% endblock %}
 {% block content %}
-<div class="container section" style="max-width:420px;">
+<div class="container section auth-card" style="max-width:420px;">
+  <img class="auth-logo" src="{% static 'images/envirgreen-mark.svg' %}" alt="EnvirGreen">
   <h1>Log in</h1>
   <form method="post">
     {% csrf_token %}
