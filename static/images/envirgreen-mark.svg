@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="EnvirGreen logo mark">
+<rect width="256" height="256" rx="54" fill="#fff"/>
+<circle cx="128" cy="128" r="118" fill="none" stroke="#6FE38A" stroke-width="7"/>
+<text x="128" y="178" text-anchor="middle" font-family="Georgia,serif" font-size="190" font-weight="700" fill="#4CAF50">e</text>
+<path d="M91 86c18-30 50-35 76-19-19 2-35 10-47 23-10 11-18 22-29 29 1-13-1-21 0-33z" fill="#fff"/>
+<path d="M103 108c19-19 38-29 61-35-20 13-37 25-54 43" fill="none" stroke="#4CAF50" stroke-width="5" stroke-linecap="round"/>
+</svg>
