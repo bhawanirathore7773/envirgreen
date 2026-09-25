@@ -592,3 +592,8 @@ body.menu-open { overflow: hidden; }
   height: 82px;
   margin: 0 auto 18px;
 }
+
+
+.nav-logo span { color: #1357B5; font-style: normal; }
+.nav-logo span b { font-weight: 800; }
+.nav-logo span em { color: var(--fresh); font-style: normal; }
