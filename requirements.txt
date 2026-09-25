@@ -5,6 +5,9 @@ Pillow>=10.0
 # Render / WSGI
 gunicorn>=23.0,<24
 
+# Database URL support (SQLite by default; PostgreSQL when DATABASE_URL is set)
+dj-database-url>=2.3,<3
+
 # Optional production database/storage dependencies.
 # Keep commented while using SQLite on Render for testing.
 # psycopg2-binary>=2.9,<3
