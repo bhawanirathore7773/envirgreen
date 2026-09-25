@@ -577,3 +577,18 @@ body.menu-open { overflow: hidden; }
   font-size: .95rem;
   font-weight: 700;
 }
+
+
+.auth-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+.auth-logo {
+  display: block;
+  width: 82px;
+  height: 82px;
+  margin: 0 auto 18px;
+}
