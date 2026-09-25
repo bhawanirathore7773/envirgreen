@@ -18,8 +18,35 @@ SECRET_KEY = os.environ.get(
     "DJANGO_SECRET_KEY",
     "dev-only-insecure-key-change-before-deploying",
 )
-DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",")
+DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(",")
+    if host.strip()
+]
+
+# Render provides the public hostname automatically. Keep localhost for local use.
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME and RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+# --- Proxy / HTTPS -------------------------------------------------------------
+# Render terminates TLS before forwarding requests to Django.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", "False").lower() == "true"
+SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", "False").lower() == "true"
+CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", "False").lower() == "true"
+SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "0"))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = (
+    os.environ.get("SECURE_HSTS_INCLUDE_SUBDOMAINS", "False").lower() == "true"
+)
+SECURE_HSTS_PRELOAD = (
+    os.environ.get("SECURE_HSTS_PRELOAD", "False").lower() == "true"
+)
+
+csrf_origins = os.environ.get("CSRF_TRUSTED_ORIGINS", "")
+CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in csrf_origins.split(",") if origin.strip()]
 
 # --- Applications -------------------------------------------------------------
 
@@ -84,15 +111,32 @@ TEMPLATES = [
 WSGI_APPLICATION = "envirgreen.wsgi.application"
 
 # --- Database -------------------------------------------------------------
-# SQLite for local dev/demo. Swap for PostgreSQL in production, e.g.:
-# DATABASES = {"default": env.db("DATABASE_URL")}
+# SQLite is the default for local/Render testing. If DATABASE_URL is provided,
+# use it so the same codebase can move to PostgreSQL later.
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if DATABASE_URL:
+    try:
+        import dj_database_url
+
+        DATABASES = {
+            "default": dj_database_url.parse(
+                DATABASE_URL,
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        }
+    except ImportError as exc:
+        raise RuntimeError(
+            "DATABASE_URL is set, but dj-database-url is not installed."
+        ) from exc
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
 
 # --- Auth -------------------------------------------------------------
 
@@ -116,11 +160,11 @@ USE_TZ = True
 
 # --- Static & media -------------------------------------------------------------
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
