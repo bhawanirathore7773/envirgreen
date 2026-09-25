@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: envirgreen
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+    startCommand: gunicorn envirgreen.wsgi:application
+    healthCheckPath: /
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: SECURE_SSL_REDIRECT
+        value: "True"
+      - key: SESSION_COOKIE_SECURE
+        value: "True"
+      - key: CSRF_COOKIE_SECURE
+        value: "True"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+
+# No Render database is required for the current testing setup.
+# Without DATABASE_URL Django uses SQLite.
+# Later, set DATABASE_URL to switch the same codebase to PostgreSQL.
