@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" role="img" aria-label="EnvirGreen — One Earth One Chance">
+<rect width="700" height="700" rx="70" fill="#222831"/>
+<circle cx="350" cy="350" r="315" fill="#fff" stroke="#6FE38A" stroke-width="8"/>
+<text x="350" y="345" text-anchor="middle" font-family="Georgia,serif" font-size="210" font-weight="700" fill="#4CAF50">e</text>
+<path d="M272 230c27-47 77-59 126-35-30 3-55 17-74 38-16 18-29 37-48 48 2-20-3-32-4-51z" fill="#fff"/>
+<path d="M292 265c30-30 59-46 98-58-32 21-59 40-87 69" fill="none" stroke="#4CAF50" stroke-width="7" stroke-linecap="round"/>
+<text x="350" y="455" text-anchor="middle" font-family="Georgia,serif" font-size="78" font-weight="700" fill="#1357B5">Envir<tspan fill="#2E9B4F">Green</tspan></text>
+<line x1="125" y1="490" x2="255" y2="490" stroke="#222" stroke-width="2"/><line x1="445" y1="490" x2="575" y2="490" stroke="#222" stroke-width="2"/>
+<text x="350" y="505" dy="0.35em" text-anchor="middle" font-family="Georgia,serif" font-size="30" fill="#222">One Earth One Chance</text>
+</svg>
