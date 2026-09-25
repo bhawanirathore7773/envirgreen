@@ -1,8 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <section class="hero">
   <div class="container hero-grid">
     <div>
+      <div class="hero-brand-mark"><img src="{% static 'images/envirgreen-mark.svg' %}" alt="EnvirGreen"></div>
       <div class="hero-eyebrow">Clean · Green · Responsible</div>
       <h1>Let's make our surroundings clean, green &amp; responsible.</h1>
       <p class="muted">Envirgreen brings people together to clean public spaces, grow greenery, build civic sense, and turn environmental concerns into real-world action.</p>
@@ -12,7 +14,7 @@
       </div>
       <p style="margin-top:14px;"><a href="{% url 'issues:report' %}">Report an issue</a></p>
     </div>
-    <div class="hero-visual">Real photos of volunteers, cleanups and plantation drives go here.</div>
+    <div class="hero-visual hero-brand-visual"><img src="{% static 'images/envirgreen-logo.svg' %}" alt="EnvirGreen — One Earth One Chance"><span>One Earth. One Chance. One community.</span></div>
   </div>
 </section>
 
